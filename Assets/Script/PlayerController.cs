@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody rigidbody;
     private CharacterController controller;
     private Vector3 direction;
-    public float forwardSpeed;
     private float counter = 0;
     private int desiredLane = 0; //-1 : left 0 : middle 1 : right
 
+    public float forwardSpeed;
     public float laneDistance; //distance between each lanes
     public float jumpForce; //jump force
     public float gravity; //gravity
@@ -17,13 +18,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        direction.z = forwardSpeed;        
+        direction.z = forwardSpeed;
 
         movementControl();
         movedLane();
@@ -34,7 +36,8 @@ public class PlayerController : MonoBehaviour
     //moving player using direction
     private void FixedUpdate()
     {
-        controller.Move(direction * Time.fixedDeltaTime);
+        rigidbody.MovePosition(rigidbody.position + direction);
+        //rigidbody.velocity = direction;
     }
 
     //checking button pressed for movement
@@ -47,7 +50,7 @@ public class PlayerController : MonoBehaviour
             if (desiredLane == 2)
             {
                 desiredLane = 1;
-                counter = 100;
+                counter = 10;
             }
             else
             {
@@ -62,15 +65,13 @@ public class PlayerController : MonoBehaviour
             if (desiredLane == -2)
             {
                 desiredLane = -1;
-                counter = 100;
+                counter = 10;
             }
             else
             {
                 counter = 0;
             }
         }
-
-
     }
 
     //to move player to another lane
@@ -80,33 +81,20 @@ public class PlayerController : MonoBehaviour
 
         targetPosition.x += desiredLane * laneDistance;
 
-        //transform.position = targetPosition;
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter/100));
+        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter / 10) * Time.fixedDeltaTime);
         counter++;
-
-        //transform.Translate(targetPosition);
     }
 
     private void checkJump()
     {
-        if (controller.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            direction.y = -1;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                jump();
-            }
-        }
-        else
-        {
-            direction.y = gravity;
+            jump();
         }
     }
 
     private void jump()
     {
-        direction.y = jumpForce;
-        print("Jumped = " + direction);
+        rigidbody.velocity = Vector3.up * jumpForce;
     }
 }
