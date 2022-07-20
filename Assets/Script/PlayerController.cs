@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Animator pAnimator;
     private Rigidbody rigidbody;
-    private CharacterController controller;
+    //private CharacterController controller;
     private Vector3 direction;
     private float counter = 0;
     private int desiredLane = 0; //-1 : left 0 : middle 1 : right
@@ -19,13 +20,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         direction.z = forwardSpeed;
+        pAnimator.SetBool("Run", true);
 
         movementControl();
         movedLane();
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump();
+            pAnimator.SetTrigger("Jump");
         }
     }
 
