@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody;
     //private CharacterController controller;
     private Vector3 direction;
+    private Vector3 jumped;
     private float counter = 0;
     private int desiredLane = 0; //-1 : left 0 : middle 1 : right
+    private int inputCounter = 0;
 
     public float forwardSpeed;
     public float laneDistance; //distance between each lanes
@@ -29,17 +31,26 @@ public class PlayerController : MonoBehaviour
         direction.z = forwardSpeed;
         pAnimator.SetBool("Run", true);
 
-        movementControl();
-        movedLane();
+        if(inputCounter % 2 == 0)
+        {
+            movementControl();
+
+            movedLane();
+        }       
 
         checkJump();
+
+        inputCounter++;
     }
 
     //moving player using direction
     private void FixedUpdate()
     {
-        rigidbody.MovePosition(rigidbody.position + direction);
         //rigidbody.velocity = direction;
+        //rigidbody.MovePosition(rigidbody.position + direction);
+        //rigidbody.velocity = forwardSpeed;
+
+        rigidbody.MovePosition(rigidbody.position + (direction));
     }
 
     //checking button pressed for movement
@@ -83,7 +94,8 @@ public class PlayerController : MonoBehaviour
 
         targetPosition.x += desiredLane * laneDistance;
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter / 10) * Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter / 5) * Time.fixedDeltaTime);
+
         counter++;
     }
 
@@ -98,6 +110,7 @@ public class PlayerController : MonoBehaviour
 
     private void jump()
     {
+        jumped = Vector3.up * jumpForce;
         rigidbody.velocity = Vector3.up * jumpForce;
     }
 }
