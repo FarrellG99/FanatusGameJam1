@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Animator pAnimator;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     //private CharacterController controller;
     private Vector3 direction;
     private Vector3 jumped;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
     }
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         //rigidbody.MovePosition(rigidbody.position + direction);
         //rigidbody.velocity = forwardSpeed;
 
-        rigidbody.MovePosition(rigidbody.position + (direction));
+        rb.MovePosition(rb.position + (direction));
     }
 
     //checking button pressed for movement
@@ -111,6 +111,6 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         jumped = Vector3.up * jumpForce;
-        rigidbody.velocity = Vector3.up * jumpForce;
+        rb.velocity = Vector3.up * jumpForce;
     }
 }
