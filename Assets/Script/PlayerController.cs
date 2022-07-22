@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         targetPosition.x += desiredLane * laneDistance;
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter / 5) * Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, (counter / 3) * Time.fixedDeltaTime);
 
         counter++;
     }

@@ -9,9 +9,16 @@ public class GroundManager : MonoBehaviour
     public float zSpawn = 0;
     public float tileLength = 100;
 
+    private int counter = 1;
+    private GameUIController gameUIController;
+    private EndGameController endGameController;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameUIController = FindObjectOfType<GameUIController>();
+        endGameController = FindObjectOfType<EndGameController>();
+
         for (int i = 0; i < groundPrefabs.Length; i++)
         {
             spawnGround(i);
@@ -21,11 +28,21 @@ public class GroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target.position.z >= zSpawn - 100)
+        print("end Game counter = " + counter);
+        if (target.position.z >= zSpawn - 100)
         {
             for (int i = 0; i < groundPrefabs.Length; i++)
             {
                 spawnGround(i);
+            }
+
+            print("end Game counter = " + counter);
+
+            counter++;
+
+            if(counter == 2)
+            {
+                endGame();
             }
         }
     }
@@ -34,5 +51,19 @@ public class GroundManager : MonoBehaviour
     {
         Instantiate(groundPrefabs[groundIndex], transform.forward * zSpawn, transform.rotation);
         zSpawn += tileLength;
+    }
+
+    private void endGame()
+    {
+        EndGameController.gameOver = true;
+
+        print("End Game Controller Game Over = " + EndGameController.gameOver);
+
+        if (EndGameController.gameOver)
+        {
+            Time.timeScale = 0;
+            endGameController.gameObject.SetActive(true);
+            gameUIController.gameObject.SetActive(false);
+        }
     }
 }
