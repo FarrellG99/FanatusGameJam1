@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &32982916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &373358031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,10 +775,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 1828565182}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4112,7 +4111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1828565182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4127,13 +4126,13 @@ RectTransform:
   - {fileID: 908618221}
   - {fileID: 983733775}
   - {fileID: 803295609}
-  m_Father: {fileID: 373358034}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -960, y: -533.57355}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 896935.1, y: 413192.3}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1828565183
 MonoBehaviour:
@@ -4185,6 +4184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500c9010243e13140b8e49f5b1c11af6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: 0
 --- !u!1001 &1881662660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4605,6 +4605,7 @@ MonoBehaviour:
   - {fileID: 2687049745644918127, guid: 68f30f168c24cc449a76ec6f728b953d, type: 3}
   zSpawn: 0
   tileLength: 100
+  endGameController: {fileID: 1828565185}
 --- !u!4 &2117349791
 Transform:
   m_ObjectHideFlags: 0

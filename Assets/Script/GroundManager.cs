@@ -11,7 +11,7 @@ public class GroundManager : MonoBehaviour
 
     private int counter = 1;
     private GameUIController gameUIController;
-    private EndGameController endGameController;
+    public EndGameController endGameController;
 
     // Start is called before the first frame update
     void Start()
@@ -55,11 +55,11 @@ public class GroundManager : MonoBehaviour
 
     private void endGame()
     {
-        EndGameController.gameOver = true;
+        endGameController.gameOver = true;
 
-        print("End Game Controller Game Over = " + EndGameController.gameOver);
+        print("End Game Controller Game Over = " + endGameController.gameOver);
 
-        if (EndGameController.gameOver)
+        if (endGameController.gameOver)
         {
             Time.timeScale = 0;
             endGameController.gameObject.SetActive(true);

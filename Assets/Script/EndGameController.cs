@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndGameController : MonoBehaviour
 {
-    public static bool gameOver;
+    public bool gameOver;
     private GameUIController gameUIController;
     private EndGameController endGameController;
 
